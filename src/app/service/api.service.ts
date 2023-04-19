@@ -7,6 +7,7 @@ import { Injectable } from '@angular/core';
 export class ApiService {
 
   url = "http://localhost:8000/ships";
+  addShips: any;
 
   constructor(private http:HttpClient) { }
 
@@ -23,16 +24,9 @@ export class ApiService {
   }
 
 
-  addShip(ship:any){
-    let headers = new HttpHeaders({
-      'Content-Type':'application/json'
-    });
-
-    let httpOption={
-      headers: headers
-    }
-
-    return this.http.post<any>(this.url, ship, httpOption);
+  addShip(ship: any) {
+    return this.http.post(this.url, ship);
   }
+
 }
 

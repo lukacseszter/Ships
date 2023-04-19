@@ -9,6 +9,8 @@
 */
 
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ApiService } from '../service/api.service';
 
 @Component({
   selector: 'app-ships',
@@ -16,10 +18,48 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ships.component.scss']
 })
 export class ShipsComponent implements OnInit {
-
-  constructor() { }
+  ships !: any;
+  ShipsForm !: FormGroup
+  constructor(
+    private api: ApiService,
+    private formBuilder: FormBuilder
+    ) { }
 
   ngOnInit(): void {
+    this.getShips();
+    this.ShipsForm = this.formBuilder.group({
+      id: [''],
+      name: [''],
+      length: [''],
+      price: [''],
+      person: [''],
+      trailer: [''],
+    });
+
+  }
+  getShips() {
+    this.api.getShips().subscribe({
+      next: (response:any) => {
+        console.log(response)
+        this.ships = response;
+      },
+      error: () => {}
+    });
+  }
+
+  onClickSaveButton() {
+
+    let employee = {
+      name: this.ShipsForm.value.name,
+      city: this.ShipsForm.value.city,
+      salary: this.ShipsForm.value.salary
+    }
+    this.api.addShips(this.ships).subscribe({
+      next: (response: any) => {
+        console.log(response);
+      },
+      error: () => {}
+    });
   }
 
 }
