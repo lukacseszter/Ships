@@ -1,3 +1,13 @@
+/*
+* File: api.service.ts
+* Author: Lukács Eszter
+* Copyright: 2023, Lukács Eszter
+* Group: Szoft II/N
+* Date: 2023-04-19
+* Github: https://github.com/lukacseszter/
+* Licenc: GNU GPL
+*/
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
